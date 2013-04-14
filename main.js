@@ -109,10 +109,6 @@ function copy (obj) {
   for (i in obj) n[i] = obj[i];
   return n
 }
-
-function playSound () {
-  spawn("/usr/bin/afplay", ["/System/Library/Sounds/Blow.aiff"]);
-}
   
 function createApp (doc, url, cb) {
   var app = {doc:doc}
@@ -151,7 +147,7 @@ function createApp (doc, url, cb) {
       if (resp.statusCode !== 201) throw new Error("Could not push document\n"+body)
       app.doc._rev = JSON.parse(body).rev
       console.log('Finished push. '+app.doc._rev)
-      playSound();
+      
       request({uri:url, headers:h}, function (err, resp, body) {
         body = JSON.parse(body);
         app.doc._attachments = body._attachments;
